@@ -15,6 +15,11 @@ export default {
   components: {
     RwvHeader,
     RwvFooter
+  },
+  watch: {
+    $route() {
+      window.analytics.page();
+    }
   }
 };
 </script>
