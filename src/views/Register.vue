@@ -5,9 +5,7 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Sign up</h1>
           <p class="text-xs-center">
-            <router-link :to="{ name: 'login' }">
-              Have an account?
-            </router-link>
+            <router-link :to="{ name: 'login' }">Have an account?</router-link>
           </p>
           <ul v-if="errors" class="error-messages">
             <li v-for="(v, k) in errors" :key="k">{{ k }} {{ v | error }}</li>
@@ -73,7 +71,13 @@ export default {
           password: this.password,
           username: this.username
         })
-        .then(() => this.$router.push({ name: "home" }));
+        .then(() => {
+          this.$router.push({ name: "home" });
+          window.analytics.identify({
+            email: this.email,
+            username: this.username
+          });
+        });
     }
   }
 };
